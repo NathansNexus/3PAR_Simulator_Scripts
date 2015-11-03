@@ -1,7 +1,8 @@
-#Create Variables for total automation
-$rootUser = "root"
-$rootPWord = ConvertTo-SecureString –String "root" –AsPlainText -Force
-$rootCredential = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $rootUser, $rootPWord
+﻿#Create Variables for total automation
+#$rootUser = "root"
+#$rootPWord = ConvertTo-SecureString –String "root" –AsPlainText -Force
+#$rootCredential = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $rootUser, $rootPWord
+$rootCred = (Get-Credential root)
 
 #Start VM
 start-VMX -Path "C:\Users\thomanat\Documents\Virtual Machines\ESD_Node\ESD_Node.vmx"
@@ -10,7 +11,7 @@ start-VMX -Path "C:\Users\thomanat\Documents\Virtual Machines\ESD_Node\ESD_Node.
 start-sleep -s 60
 
 #Pass command to start daemon
-New-SSHSession -ComputerName '192.168.253.128' -Credential (Get-Credential $rootCredential)
+New-SSHSession -ComputerName '192.168.253.128' -Credential (Get-Credential $rootCred)
 Invoke-SSHCommand -Index 0 -command "esd"
 
 #Start remaining VMs
