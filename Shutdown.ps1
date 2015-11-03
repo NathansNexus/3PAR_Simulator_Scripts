@@ -19,7 +19,7 @@ $stream.Read()
 $stream.Write("yes")
 
 #Wait for them to shutdown
-Start-Sleep -s 75
+Start-Sleep -s 300
 
 #Stop VMs
 get-vmx -Path "C:\Users\thomanat\Documents\Virtual Machines\Sim_Node_0\Sim_Node_0.vmx"| stop-vmx
